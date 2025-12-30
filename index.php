@@ -1,0 +1,1126 @@
+<?php
+// --- Configuration & Data (服务端数据) ---
+
+// 导航菜单配置
+$navItems = [
+    'home' => ['icon' => 'home', 'label' => 'Home'],
+    'services' => ['icon' => 'cogs', 'label' => 'Services'],
+    'products' => ['icon' => 'shopping-bag', 'label' => 'Products'],
+    'cart' => ['icon' => 'shopping-cart', 'label' => 'Cart', 'badge' => true],
+    'contact-list' => ['icon' => 'address-book', 'label' => 'Team'],
+];
+
+// 初始产品数据 (模拟数据库)
+$initialProducts = [
+    [ 
+        "id" => 1, 
+        "name" => "Enterprise Financial Suite", 
+        "price" => 499, 
+        "desc" => "All-in-one software for corporate financial analysis and reporting.", 
+        "image" => "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=60"
+    ],
+    [ 
+        "id" => 2, 
+        "name" => "Personal Budget Planner", 
+        "price" => 49, 
+        "desc" => "Advanced Excel templates and dashboard for home finance.", 
+        "image" => "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=500&q=60"
+    ],
+    [ 
+        "id" => 3, 
+        "name" => "Risk Assessment Report", 
+        "price" => 199, 
+        "desc" => "Comprehensive industry risk analysis for the current fiscal year.", 
+        "image" => "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=60"
+    ],
+    [
+        "id" => 4,
+        "name" => "Tax Compliance Guide 2024",
+        "price" => 79,
+        "desc" => "Essential digital guidebook for navigating new tax regulations.",
+        "image" => "https://images.unsplash.com/photo-1586486855514-8c633cc6fd38?auto=format&fit=crop&w=500&q=60"
+    ],
+    [
+        "id" => 5,
+        "name" => "Investment Strategy Session",
+        "price" => 299,
+        "desc" => "1-hour video consultation with a senior portfolio manager.",
+        "image" => "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=500&q=60"
+    ],
+    [
+        "id" => 6,
+        "name" => "Audit Preparation Kit",
+        "price" => 149,
+        "desc" => "Checklists and tools to get your business ready for auditing.",
+        "image" => "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=500&q=60"
+    ],
+    [
+        "id" => 7,
+        "name" => "Crypto Tracker Plugin",
+        "price" => 89,
+        "desc" => "Real-time asset tracking plugin for your dashboard.",
+        "image" => "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=500&q=60"
+    ],
+    [
+        "id" => 8,
+        "name" => "Retirement Roadmap",
+        "price" => 129,
+        "desc" => "Long-term planning tools for a secure retirement.",
+        "image" => "https://images.unsplash.com/photo-1516534775068-ba3e7458af70?auto=format&fit=crop&w=500&q=60"
+    ]
+];
+
+// 服务列表数据
+$services = [
+    ['title' => 'Auditing', 'desc' => 'Full compliance checks.'],
+    ['title' => 'Tax Planning', 'desc' => 'Optimize liabilities.'],
+    ['title' => 'Wealth Mgmt', 'desc' => 'Personal portfolio growth.'],
+    ['title' => 'Corporate Strategy', 'desc' => 'M&A and expansion planning.'],
+    ['title' => 'Payroll Services', 'desc' => 'Automated employee payments.'],
+    ['title' => 'Crypto Advisory', 'desc' => 'Blockchain asset management.'],
+];
+
+// 初始联系人数据
+$contacts = [
+    ["name" => "Sarah Johnson", "role" => "Analyst", "dept" => "Analysis", "email" => "sarah@financepro.com", "status" => "Available"],
+    ["name" => "Mike Chen", "role" => "Manager", "dept" => "Risk", "email" => "mike@financepro.com", "status" => "Busy"],
+    ["name" => "Lisa Brown", "role" => "Advisor", "dept" => "Investment", "email" => "lisa@financepro.com", "status" => "Available"],
+    ["name" => "Tom Wilson", "role" => "Dev", "dept" => "Tech", "email" => "tom@financepro.com", "status" => "Offline"],
+    ["name" => "David Kim", "role" => "Accountant", "dept" => "Tax", "email" => "david@financepro.com", "status" => "Available"]
+];
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinancePro | Premium Financial Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        :root {
+            --primary: #1a3a5f; --secondary: #2c5aa0; --accent: #4caf50;
+            --light: #f8f9fa; --dark: #212529; --gray: #6c757d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1); --shadow-hover: 0 10px 20px rgba(0,0,0,0.15);
+            --danger: #dc3545; --warning: #ffc107; --success: #28a745;
+        }
+        body { background-color: #f5f7fa; color: var(--dark); line-height: 1.6; overflow-x: hidden; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Page Transitions */
+        .page { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; padding-top: 100px; min-height: calc(100vh - 400px); }
+        .page.active { display: block; opacity: 1; transform: translateY(0); }
+        
+        section { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; position: relative; display: inline-block; }
+        .section-title h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--accent); }
+        
+        /* Buttons */
+        .btn { display: inline-block; padding: 12px 30px; background-color: var(--primary); color: white; border: none; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; }
+        .btn:hover { background-color: var(--secondary); transform: translateY(-3px); box-shadow: var(--shadow); }
+        .btn-accent { background-color: var(--accent); } .btn-accent:hover { background-color: #3d8c40; }
+        .btn-outline { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background-color: var(--primary); color: white; }
+        .btn-danger { background-color: var(--danger); } .btn-danger:hover { background-color: #c82333; }
+        
+        /* Header */
+        header { background-color: white; box-shadow: var(--shadow); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; list-style: none; align-items: center; }
+        .nav-links li { margin-left: 25px; position: relative; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: color 0.3s ease; display: flex; align-items: center; }
+        .nav-links a:hover, .nav-links a.active { color: var(--secondary); }
+        .nav-links i { margin-right: 8px; }
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+        
+        /* User Menu */
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; }
+        .user-dropdown { position: absolute; top: 50px; right: 0; background: white; border-radius: 8px; box-shadow: var(--shadow); min-width: 200px; display: none; z-index: 1001; }
+        .user-dropdown.show { display: block; animation: fadeIn 0.3s ease; }
+        .user-info { padding: 20px; border-bottom: 1px solid #eee; text-align: center; }
+        .user-actions { list-style: none; }
+        .user-actions a { display: block; padding: 12px 20px; color: var(--dark); }
+        .user-actions a:hover { background-color: #f8f9fa; color: var(--secondary); }
+        .cart-count { position: absolute; top: -8px; right: -8px; background-color: var(--danger); color: white; font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+        /* General Layouts */
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 120px 0 80px; text-align: center; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        
+        /* Product Grid & Cards */
+        .products-grid, .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        
+        .product-card { 
+            background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); 
+            transition: all 0.3s ease; display: flex; flex-direction: column; border: 1px solid #eee;
+        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+        
+        /* Image container */
+        .product-img-container { width: 100%; height: 180px; overflow: hidden; background: #eee; position: relative; }
+        .product-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .product-card:hover .product-img-container img { transform: scale(1.05); }
+        
+        .product-details { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .product-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
+        .product-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; flex-grow: 1; }
+        .product-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .product-price { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+
+        .service-card { background: white; border-radius: 8px; padding: 30px; box-shadow: var(--shadow); text-align: center; }
+
+        /* Tables & Forms */
+        .contact-table, .orders-table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: var(--shadow); background: white; border-radius: 8px; overflow: hidden; }
+        .contact-table th, .orders-table th { background-color: var(--primary); color: white; padding: 15px; text-align: left; }
+        .contact-table td, .orders-table td { padding: 15px; border-bottom: 1px solid #eee; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; }
+        
+        /* Search Bar */
+        .search-container { margin-bottom: 20px; display: flex; gap: 10px; }
+        .search-input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+
+        /* Toast Notifications */
+        #toast-container { position: fixed; top: 80px; right: 20px; z-index: 2000; }
+        .toast { background: white; border-left: 4px solid var(--primary); padding: 15px 20px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-radius: 4px; display: flex; align-items: center; justify-content: space-between; min-width: 300px; animation: slideIn 0.3s ease; }
+        .toast.success { border-left-color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast i { margin-right: 10px; font-size: 1.2rem; }
+        .toast-close { cursor: pointer; color: #999; margin-left: 10px; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* Modal Overlay */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1050; display: none; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 8px; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: relative; }
+        .modal-close { position: absolute; top: 15px; right: 15px; cursor: pointer; font-size: 1.2rem; }
+
+        /* Admin Styles */
+        .admin-form-container { background: white; padding: 25px; margin-top: 20px; border-radius: 8px; box-shadow: var(--shadow); }
+        .admin-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .file-upload-wrapper { border: 2px dashed #ddd; padding: 20px; text-align: center; border-radius: 6px; cursor: pointer; transition: all 0.3s; position: relative; }
+        .file-upload-wrapper:hover { border-color: var(--primary); background: #f8f9fa; }
+        .file-upload-input { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 70px; left: 0; background: white; width: 100%; flex-direction: column; padding: 20px 0; transform: translateY(-150%); transition: transform 0.4s ease; box-shadow: var(--shadow); }
+            .nav-links.active { transform: translateY(0); }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+            .admin-form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fas fa-times modal-close" onclick="closeModal()"></i>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#home" class="logo" onclick="showPage('home')">Finance<span>Pro</span></a>
+                <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+                <ul class="nav-links" id="navLinks">
+                    <?php foreach($navItems as $id => $item): ?>
+                    <li>
+                        <a href="#<?php echo $id; ?>" onclick="showPage('<?php echo $id; ?>')" <?php echo ($id === 'home' ? 'class="active"' : ''); ?>>
+                            <i class="fas fa-<?php echo $item['icon']; ?>"></i> <?php echo $item['label']; ?>
+                            <?php if(isset($item['badge'])): ?>
+                            <span class="cart-count" id="headerCartCount">0</span>
+                            <?php endif; ?>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                    
+                    <li id="authLinks"><a href="#auth" onclick="showPage('auth')"><i class="fas fa-user"></i> Login</a></li>
+                    <li id="userMenu" class="user-menu" style="display: none;">
+                        <div class="user-avatar" id="userAvatar" onclick="toggleUserDropdown()"><span id="avatarInitials">U</span></div>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="user-info">
+                                <div class="user-name" id="dropdownUserName">User</div>
+                                <div class="user-email" id="dropdownUserEmail">email</div>
+                            </div>
+                            <ul class="user-actions">
+                                <li><a href="#profile" onclick="showPage('profile')">Profile</a></li>
+                                <li><a href="#orders" onclick="showPage('orders')">My Orders</a></li>
+                                <li><a href="#settings" onclick="showPage('settings')">Settings</a></li>
+                                <li><a href="#" onclick="userLogout()">Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="adminLink" style="display: none;"><a href="#admin-login" onclick="showPage('admin-login')"><i class="fas fa-user-shield"></i> Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="container">
+                    <h1>Master Your Financial Future</h1>
+                    <p>Professional tools and insights for personal and corporate financial growth.</p>
+                    <div style="margin-top: 30px;">
+                        <a href="#products" onclick="showPage('products')" class="btn btn-accent">Explore Tools</a>
+                        <a href="#auth" onclick="showPage('auth')" class="btn btn-outline" style="color:white; border-color:white; margin-left:10px;">Get Started</a>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <div class="section-title"><h2>Why Choose Us</h2></div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <i class="fas fa-chart-pie" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                            <h3>Data Driven</h3>
+                            <p>We use advanced analytics to provide accurate financial forecasting.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-lock" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                            <h3>Secure & Private</h3>
+                            <p>Your financial data is encrypted with enterprise-grade security.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-users" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                            <h3>Expert Support</h3>
+                            <p>Access to certified financial advisors 24/7.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="services" class="page">
+            <section class="hero"><div class="container"><h1>Our Services</h1></div></section>
+            <section>
+                <div class="container">
+                    <div class="services-grid">
+                        <?php foreach($services as $service): ?>
+                        <div class="service-card">
+                            <h3><?php echo $service['title']; ?></h3>
+                            <p><?php echo $service['desc']; ?></p>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="products" class="page">
+            <section class="hero"><div class="container"><h1>Financial Products Marketplace</h1></div></section>
+            <section>
+                <div class="container">
+                    <div class="search-container">
+                        <input type="text" id="productSearch" class="search-input" placeholder="Search products (e.g., software, report, course)..." onkeyup="filterProducts()">
+                    </div>
+                    <div class="products-grid" id="productsGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="cart" class="page">
+            <section class="hero"><div class="container"><h1>Shopping Cart</h1></div></section>
+            <section>
+                <div class="container" style="max-width: 900px;">
+                    <div id="cartItemsContainer"></div>
+                    <div class="cart-summary" id="cartSummary" style="background:white; padding:20px; border-radius:8px; margin-top:20px; display:none;">
+                        <h3 style="border-bottom:1px solid #eee; padding-bottom:10px;">Summary</h3>
+                        <div style="display:flex; justify-content:space-between; margin:10px 0;"><span>Total:</span><span id="cartTotal" style="font-weight:bold; font-size:1.2rem;">$0.00</span></div>
+                        <button class="btn btn-accent" style="width:100%;" onclick="showPage('checkout')">Proceed to Checkout</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="checkout" class="page">
+            <section class="hero"><div class="container"><h1>Checkout</h1></div></section>
+            <section>
+                <div class="container" style="max-width: 600px; background: white; padding: 40px; border-radius: 8px;">
+                    <form id="checkoutForm" onsubmit="placeOrder(event)">
+                        <div class="form-group"><label>Full Name</label><input type="text" id="chkName" required></div>
+                        <div class="form-group"><label>Address</label><input type="text" id="chkAddress" required></div>
+                        <div class="form-group"><label>Card Number (Simulated)</label><input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" required></div>
+                        <button type="submit" class="btn btn-success" style="width:100%">Place Order</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div id="auth" class="page">
+            <section class="hero"><div class="container"><h1>Welcome</h1></div></section>
+            <section>
+                <div class="container" style="max-width: 400px; background: white; padding: 30px; border-radius: 8px; box-shadow: var(--shadow);">
+                    <div style="display:flex; margin-bottom:20px; border-bottom:1px solid #eee;">
+                        <div style="flex:1; text-align:center; padding:10px; cursor:pointer; font-weight:bold; border-bottom:2px solid var(--primary);" id="tabLogin" onclick="toggleAuth('login')">Login</div>
+                        <div style="flex:1; text-align:center; padding:10px; cursor:pointer;" id="tabRegister" onclick="toggleAuth('register')">Register</div>
+                    </div>
+                    
+                    <form id="loginForm" onsubmit="userLogin(event)">
+                        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" required></div>
+                        <div class="form-group"><label>Password</label><input type="password" id="loginPassword" required></div>
+                        <button type="submit" class="btn btn-accent" style="width:100%">Login</button>
+                        <p style="text-align:center; margin-top:10px;"><a href="#forgot-password" onclick="showPage('forgot-password')" style="color:var(--secondary)">Forgot Password?</a></p>
+                    </form>
+
+                    <form id="registerForm" style="display:none;" onsubmit="userRegister(event)">
+                        <div class="form-group"><label>First Name</label><input type="text" id="regFirst" required></div>
+                        <div class="form-group"><label>Last Name</label><input type="text" id="regLast" required></div>
+                        <div class="form-group"><label>Email</label><input type="email" id="regEmail" required></div>
+                        <div class="form-group"><label>Password</label><input type="password" id="regPass" required></div>
+                        <button type="submit" class="btn btn-success" style="width:100%">Create Account</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div id="forgot-password" class="page">
+            <section class="hero"><div class="container"><h1>Reset Password</h1></div></section>
+            <section>
+                <div class="container" style="max-width: 400px; background: white; padding: 30px; border-radius: 8px;">
+                    <p>Enter your email address and we'll send you a link to reset your password.</p>
+                    <form onsubmit="event.preventDefault(); showToast('Reset link sent!', 'success'); showPage('auth');">
+                        <div class="form-group" style="margin-top:20px;"><input type="email" placeholder="Enter your email" required></div>
+                        <button type="submit" class="btn btn-accent" style="width:100%">Send Reset Link</button>
+                    </form>
+                    <button class="btn btn-outline" onclick="showPage('auth')" style="width:100%; margin-top:10px;">Back to Login</button>
+                </div>
+            </section>
+        </div>
+
+        <div id="contact-list" class="page">
+            <section class="hero"><div class="container"><h1>Our Team</h1></div></section>
+            <section>
+                <div class="container">
+                    <div class="search-container">
+                        <input type="text" id="contactSearch" class="search-input" placeholder="Search team members..." onkeyup="filterContacts()">
+                    </div>
+                    <table class="contact-table">
+                        <thead><tr><th>Name</th><th>Role</th><th>Department</th><th>Email</th><th>Status</th></tr></thead>
+                        <tbody id="contactTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <div id="profile" class="page">
+            <section class="hero"><div class="container"><h1>My Profile</h1></div></section>
+            <section>
+                <div class="container" style="max-width: 800px;">
+                    <div style="background:white; padding:30px; border-radius:8px; display:flex; gap:20px; align-items:center;">
+                        <div style="width:100px; height:100px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.5rem;" id="profilePic">U</div>
+                        <div>
+                            <h2 id="profName">User Name</h2>
+                            <p id="profEmail">email@example.com</p>
+                            <button class="btn btn-outline" onclick="showPage('settings')" style="margin-top:10px;">Edit Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="settings" class="page">
+            <section class="hero"><div class="container"><h1>Account Settings</h1></div></section>
+            <section>
+                <div class="container" style="max-width: 600px; background: white; padding: 30px; border-radius: 8px;">
+                    <h3>Edit Information</h3>
+                    <form onsubmit="updateProfile(event)">
+                        <div class="form-group"><label>First Name</label><input type="text" id="setFirst"></div>
+                        <div class="form-group"><label>Last Name</label><input type="text" id="setLast"></div>
+                        <div class="form-group"><label>Email</label><input type="email" id="setEmail" readonly style="background:#eee"></div>
+                        <div class="form-group">
+                            <label style="display:flex; align-items:center; gap:10px;">
+                                <input type="checkbox" style="width:auto;"> Subscribe to Newsletter
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-accent">Save Changes</button>
+                        <button type="button" class="btn btn-outline" onclick="showPage('profile')">Cancel</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div id="orders" class="page">
+            <section class="hero"><div class="container"><h1>My Orders</h1></div></section>
+            <section><div class="container"><div id="userOrdersList"></div></div></section>
+        </div>
+
+        <div id="admin-login" class="page">
+            <section class="hero"><div class="container"><h1>Admin Portal</h1></div></section>
+            <section>
+                <div class="container" style="max-width: 400px; text-align:center;">
+                    <form onsubmit="adminLogin(event)" style="background:white; padding:30px; border-radius:8px;">
+                        <div class="form-group"><input type="text" id="adminUser" placeholder="Username (admin)" required></div>
+                        <div class="form-group"><input type="password" id="adminPass" placeholder="Password (admin123)" required></div>
+                        <button type="submit" class="btn" style="width:100%;">Access Dashboard</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div id="admin-dashboard" class="page">
+            <section class="hero"><div class="container"><h1>Admin Dashboard</h1></div></section>
+            <section>
+                <div class="container">
+                    <div style="margin-bottom:20px;">
+                        <button class="btn btn-outline" onclick="showPage('admin-products')">Manage Products</button>
+                        <button class="btn btn-outline" onclick="showPage('admin-orders')">Manage Orders</button>
+                        <button class="btn btn-danger" onclick="userLogout()">Logout</button>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card" style="text-align:center;"><h2>Total Sales</h2><p id="dashSales">$0.00</p></div>
+                        <div class="service-card" style="text-align:center;"><h2>Orders</h2><p id="dashOrders">0</p></div>
+                        <div class="service-card" style="text-align:center;"><h2>Users</h2><p id="dashUsers">0</p></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="admin-products" class="page">
+            <section class="hero"><div class="container"><h1>Manage Products</h1></div></section>
+            <section>
+                <div class="container">
+                    <button class="btn btn-outline" onclick="showPage('admin-dashboard')">Back to Dash</button>
+                    <div class="admin-form-container">
+                        <h3><i class="fas fa-plus-circle"></i> Add New Product</h3>
+                        <form onsubmit="addProduct(event)">
+                            <div class="admin-form-grid">
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input type="text" id="newProdName" placeholder="e.g., Annual Report 2024" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Price ($)</label>
+                                    <input type="number" id="newProdPrice" placeholder="e.g., 199.99" step="0.01" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="newProdDesc" rows="3" placeholder="Enter product description..." required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px;"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Image</label>
+                                <div style="display:flex; gap:15px; flex-wrap:wrap;">
+                                    <div style="flex:1; min-width:250px;">
+                                        <div style="margin-bottom:5px; font-size:0.9rem; color:#666;">Option 1: Paste Image URL</div>
+                                        <input type="url" id="newProdImgUrl" placeholder="https://example.com/image.jpg" oninput="previewImageFromUrl()">
+                                    </div>
+                                    <div style="flex:1; min-width:250px;">
+                                        <div style="margin-bottom:5px; font-size:0.9rem; color:#666;">Option 2: Upload Local File</div>
+                                        <div class="file-upload-wrapper">
+                                            <i class="fas fa-cloud-upload-alt" style="font-size:1.5rem; color:var(--primary);"></i>
+                                            <span style="margin-left:10px; color:var(--gray);">Click to Upload</span>
+                                            <input type="file" id="newProdFile" accept="image/*" class="file-upload-input" onchange="previewImageFromFile()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="imgPreviewContainer" style="margin-top:15px; display:none; background:#eee; padding:10px; border-radius:4px; text-align:center;">
+                                    <p style="font-size:0.8rem; margin-bottom:5px;">Preview:</p>
+                                    <img id="imgPreview" src="" style="max-height:150px; border-radius:4px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success" style="width:100%; margin-top:10px;">Add Product</button>
+                        </form>
+                    </div>
+                    
+                    <h3 style="margin-top:40px; border-bottom:2px solid var(--primary); padding-bottom:10px;">Current Products</h3>
+                    <div id="adminProdList" style="margin-top:20px;"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="admin-orders" class="page">
+            <section class="hero"><div class="container"><h1>Manage Orders</h1></div></section>
+            <section>
+                <div class="container">
+                    <button class="btn btn-outline" onclick="showPage('admin-dashboard')">Back to Dash</button>
+                    <div class="search-container" style="margin-top:20px;">
+                         <input type="text" id="orderSearch" class="search-input" placeholder="Search Order ID or Customer Name..." onkeyup="filterAdminOrders()">
+                    </div>
+                    <div id="adminOrderList"></div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+    <footer>
+        <div class="container" style="text-align:center; color:#adb5bd; padding:40px 0;">
+            <p>&copy; 2023 FinancePro. All rights reserved.</p>
+            <p style="margin-top: 10px;">
+                <a href="#admin-login" onclick="showPage('admin-login')" style="color: #6c757d; font-size: 0.8rem; text-decoration: none;">Admin Portal</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data & State ---
+        let currentPage = 'home';
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        
+        // --- DATA INJECTION FROM PHP TO JS ---
+        // 这里我们将PHP数组转换为JS对象，作为初始数据源
+        const serverProducts = <?php echo json_encode($initialProducts); ?>;
+        const serverContacts = <?php echo json_encode($contacts); ?>;
+
+        let products = JSON.parse(localStorage.getItem('products')) || serverProducts;
+        // 如果本地存储被清除或为空，重新加载PHP提供的默认数据
+        if(products.length < 1) { 
+            products = serverProducts; 
+            localStorage.setItem('products', JSON.stringify(products)); 
+        }
+
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        const adminExists = users.some(u => u.isAdmin);
+        if (!adminExists) {
+            users.push({ id: 1, first: "Admin", last: "User", email: "admin", pass: "admin123", isAdmin: true });
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        
+        // Contacts logic (Usually read-only, so we can use server data for init)
+        const contacts = serverContacts;
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            if(!localStorage.getItem('users')) localStorage.setItem('users', JSON.stringify(users));
+            
+            updateAuthUI();
+            setupNav();
+            loadProducts(); // Load initially
+            loadContacts();
+            
+            // Handle hash
+            const hash = window.location.hash.substring(1);
+            showPage(hash || 'home');
+        });
+
+        // --- Navigation ---
+        function setupNav() {
+            document.getElementById('menuToggle').addEventListener('click', () => {
+                document.getElementById('navLinks').classList.toggle('active');
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (!e.target.closest('.user-menu')) {
+                    document.getElementById('userDropdown').classList.remove('show');
+                }
+            });
+        }
+
+        function showPage(pageId) {
+            // Guard clauses
+            if (pageId.startsWith('admin') && (!currentUser || !currentUser.isAdmin)) {
+                if (pageId !== 'admin-login') { showToast('Access Denied', 'error'); return showPage('admin-login'); }
+            }
+            if ((pageId === 'profile' || pageId === 'orders' || pageId === 'settings') && !currentUser) {
+                showToast('Please login first', 'error'); return showPage('auth');
+            }
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            // Nav Active State
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav-links a[href="#${pageId}"]`);
+            if(activeLink) activeLink.classList.add('active');
+
+            // Page Specific Loads
+            window.scrollTo(0,0);
+            if(pageId === 'cart') updateCartDisplay();
+            if(pageId === 'profile') loadProfile();
+            if(pageId === 'settings') loadSettings();
+            if(pageId === 'orders') loadUserOrders();
+            if(pageId === 'admin-dashboard') loadDashboard();
+            if(pageId === 'admin-products') loadAdminProducts();
+            if(pageId === 'admin-orders') loadAdminOrders();
+            
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // --- Toast & Modal ---
+        function showToast(msg, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle';
+            toast.innerHTML = `<i class="fas fa-${icon}"></i> <span>${msg}</span> <i class="fas fa-times toast-close" onclick="this.parentElement.remove()"></i>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function showModal(content) {
+            const modal = document.getElementById('modalOverlay');
+            document.getElementById('modalBody').innerHTML = content;
+            modal.style.display = 'flex';
+        }
+        function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+
+        // --- Authentication ---
+        function toggleAuth(type) {
+            const login = document.getElementById('loginForm');
+            const reg = document.getElementById('registerForm');
+            const tLog = document.getElementById('tabLogin');
+            const tReg = document.getElementById('tabRegister');
+            
+            if(type === 'login') {
+                login.style.display = 'block'; reg.style.display = 'none';
+                tLog.style.borderBottom = '2px solid var(--primary)'; tReg.style.borderBottom = 'none';
+            } else {
+                login.style.display = 'none'; reg.style.display = 'block';
+                tReg.style.borderBottom = '2px solid var(--primary)'; tLog.style.borderBottom = 'none';
+            }
+        }
+
+        function userLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPassword').value;
+            const user = users.find(u => u.email === email && u.pass === pass);
+            
+            if(user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                updateAuthUI();
+                showToast(`Welcome back, ${user.first}!`, 'success');
+                showPage('profile');
+            } else {
+                showToast('Invalid credentials', 'error');
+            }
+        }
+
+        function userRegister(e) {
+            e.preventDefault();
+            const first = document.getElementById('regFirst').value;
+            const last = document.getElementById('regLast').value;
+            const email = document.getElementById('regEmail').value;
+            const pass = document.getElementById('regPass').value;
+            
+            if(users.some(u => u.email === email)) return showToast('Email already exists', 'error');
+            
+            const newUser = { id: Date.now(), first, last, email, pass, isAdmin: false };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            showToast('Account created! Please login.', 'success');
+            toggleAuth('login');
+        }
+
+        function adminLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('adminUser').value;
+            const p = document.getElementById('adminPass').value;
+            const admin = users.find(user => user.email === u && user.pass === p && user.isAdmin);
+            
+            if(admin) {
+                currentUser = admin;
+                localStorage.setItem('currentUser', JSON.stringify(admin));
+                updateAuthUI();
+                showToast('Admin Access Granted', 'success');
+                showPage('admin-dashboard');
+            } else {
+                showToast('Invalid Admin Credentials', 'error');
+            }
+        }
+
+        function userLogout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateAuthUI();
+            showPage('home');
+            showToast('Logged out successfully');
+        }
+
+        function updateAuthUI() {
+            const authLinks = document.getElementById('authLinks');
+            const userMenu = document.getElementById('userMenu');
+            const adminLink = document.getElementById('adminLink');
+            
+            if(currentUser) {
+                authLinks.style.display = 'none';
+                userMenu.style.display = 'block';
+                document.getElementById('avatarInitials').innerText = currentUser.first[0];
+                document.getElementById('dropdownUserName').innerText = `${currentUser.first} ${currentUser.last}`;
+                document.getElementById('dropdownUserEmail').innerText = currentUser.email;
+                if(currentUser.isAdmin) adminLink.style.display = 'block';
+                updateCartCount();
+            } else {
+                authLinks.style.display = 'block';
+                userMenu.style.display = 'none';
+                adminLink.style.display = 'none';
+                document.getElementById('headerCartCount').innerText = '0';
+            }
+        }
+
+        function toggleUserDropdown() {
+            document.getElementById('userDropdown').classList.toggle('show');
+        }
+
+        // --- User Profile ---
+        function loadProfile() {
+            document.getElementById('profName').innerText = `${currentUser.first} ${currentUser.last}`;
+            document.getElementById('profEmail').innerText = currentUser.email;
+            document.getElementById('profilePic').innerText = currentUser.first[0];
+        }
+
+        function loadSettings() {
+            document.getElementById('setFirst').value = currentUser.first;
+            document.getElementById('setLast').value = currentUser.last;
+            document.getElementById('setEmail').value = currentUser.email;
+        }
+
+        function updateProfile(e) {
+            e.preventDefault();
+            const newFirst = document.getElementById('setFirst').value;
+            const newLast = document.getElementById('setLast').value;
+            
+            currentUser.first = newFirst;
+            currentUser.last = newLast;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            const index = users.findIndex(u => u.id === currentUser.id);
+            if(index !== -1) {
+                users[index] = currentUser;
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+            showToast('Profile Updated', 'success');
+            showPage('profile');
+        }
+
+        // --- Product Logic ---
+        function loadProducts() {
+            renderProductGrid(products);
+        }
+
+        function renderProductGrid(data) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = data.map(p => `
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="${p.image || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${p.name}">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-desc">${p.desc}</div>
+                        <div class="product-meta">
+                            <div class="product-price">$${p.price}</div>
+                            <button class="btn btn-accent" style="padding: 8px 15px; font-size: 0.9rem;" onclick="addToCart(${p.id})">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts() {
+            const term = document.getElementById('productSearch').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term));
+            renderProductGrid(filtered);
+        }
+
+        // --- Cart Logic ---
+        function getCart() {
+            if(!currentUser) return [];
+            return JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+        }
+
+        function saveCart(cart) {
+            if(currentUser) localStorage.setItem(`cart_${currentUser.id}`, JSON.stringify(cart));
+        }
+
+        function addToCart(id) {
+            if(!currentUser) { showToast('Login to shop', 'error'); return showPage('auth'); }
+            let cart = getCart();
+            const item = cart.find(i => i.id === id);
+            if(item) item.qty++;
+            else {
+                const prod = products.find(p => p.id === id);
+                cart.push({...prod, qty: 1});
+            }
+            saveCart(cart);
+            updateCartCount();
+            showToast('Added to cart', 'success');
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const count = cart.reduce((sum, i) => sum + i.qty, 0);
+            document.getElementById('headerCartCount').innerText = count;
+        }
+
+        function updateCartDisplay() {
+            const cart = getCart();
+            const container = document.getElementById('cartItemsContainer');
+            const summary = document.getElementById('cartSummary');
+            
+            if(cart.length === 0) {
+                container.innerHTML = '<p style="text-align:center; padding:40px;">Your cart is empty.</p>';
+                summary.style.display = 'none';
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = cart.map(item => {
+                total += item.price * item.qty;
+                return `
+                <div style="background:white; padding:20px; border-radius:8px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center;">
+                    <div style="display:flex; align-items:center; gap:15px;">
+                        <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
+                        <div>
+                            <h4 style="color:var(--primary)">${item.name}</h4>
+                            <div style="color:var(--accent)">$${item.price} x ${item.qty}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-danger" style="padding:5px 10px;" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`;
+            }).join('');
+            
+            document.getElementById('cartTotal').innerText = `$${total.toFixed(2)}`;
+            summary.style.display = 'block';
+        }
+
+        function removeFromCart(id) {
+            let cart = getCart();
+            cart = cart.filter(i => i.id !== id);
+            saveCart(cart);
+            updateCartDisplay();
+            updateCartCount();
+        }
+
+        function placeOrder(e) {
+            e.preventDefault();
+            const cart = getCart();
+            if(cart.length === 0) return showToast('Cart is empty', 'error');
+            
+            const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const newOrder = {
+                id: 'ORD-' + Date.now().toString().slice(-6),
+                userId: currentUser.id,
+                userName: document.getElementById('chkName').value,
+                items: cart,
+                total: total,
+                date: new Date().toLocaleDateString(),
+                status: 'Pending'
+            };
+            
+            orders.push(newOrder);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            saveCart([]);
+            updateCartCount();
+            showPage('home');
+            showModal(`<div style="text-align:center; color:var(--success)"><i class="fas fa-check-circle" style="font-size:3rem;"></i><h3>Order Placed!</h3><p>Order ID: ${newOrder.id}</p></div>`);
+        }
+
+        function loadUserOrders() {
+            const myOrders = orders.filter(o => o.userId === currentUser.id);
+            const container = document.getElementById('userOrdersList');
+            if(myOrders.length === 0) return container.innerHTML = '<p>No orders yet.</p>';
+            
+            container.innerHTML = myOrders.map(o => `
+                <div style="background:white; padding:20px; border-radius:8px; margin-bottom:15px; border-left:4px solid var(--primary);">
+                    <div style="display:flex; justify-content:space-between;">
+                        <strong>${o.id}</strong>
+                        <span style="color:var(--gray)">${o.date}</span>
+                    </div>
+                    <div style="margin:10px 0;">Status: <b>${o.status}</b></div>
+                    <div style="font-weight:bold; color:var(--accent)">Total: $${o.total.toFixed(2)}</div>
+                </div>
+            `).join('');
+        }
+
+        // --- Contact List Logic ---
+        function loadContacts() {
+            renderContacts(contacts);
+        }
+
+        function renderContacts(data) {
+            const tbody = document.getElementById('contactTableBody');
+            tbody.innerHTML = data.map(c => `
+                <tr>
+                    <td>${c.name}</td>
+                    <td>${c.role}</td>
+                    <td>${c.dept}</td>
+                    <td><a href="mailto:${c.email}">${c.email}</a></td>
+                    <td><span style="padding:4px 8px; border-radius:12px; background:${c.status === 'Available' ? '#d4edda' : '#f8d7da'}; color:${c.status === 'Available' ? '#155724' : '#721c24'}; font-size:0.8rem;">${c.status}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function filterContacts() {
+            const term = document.getElementById('contactSearch').value.toLowerCase();
+            const filtered = contacts.filter(c => c.name.toLowerCase().includes(term) || c.dept.toLowerCase().includes(term));
+            renderContacts(filtered);
+        }
+
+        // --- Admin Logic ---
+        function loadDashboard() {
+            document.getElementById('dashSales').innerText = '$' + orders.reduce((sum, o) => sum + o.total, 0).toFixed(2);
+            document.getElementById('dashOrders').innerText = orders.length;
+            document.getElementById('dashUsers').innerText = users.length;
+        }
+
+        function loadAdminProducts() {
+            const list = document.getElementById('adminProdList');
+            list.innerHTML = products.map(p => `
+                <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:15px; border-bottom:1px solid #eee;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <img src="${p.image || 'https://via.placeholder.com/50'}" style="width:40px; height:40px; border-radius:4px; object-fit:cover;">
+                        <span>${p.name} ($${p.price})</span>
+                    </div>
+                    <button class="btn btn-danger" style="padding:5px 10px;" onclick="deleteProduct(${p.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        // --- NEW: Image Preview Functions ---
+        let currentImagePreview = 'https://via.placeholder.com/300x200?text=No+Image';
+
+        function previewImageFromUrl() {
+            const url = document.getElementById('newProdImgUrl').value;
+            if(url) {
+                document.getElementById('imgPreview').src = url;
+                document.getElementById('imgPreviewContainer').style.display = 'block';
+                currentImagePreview = url;
+            }
+        }
+
+        function previewImageFromFile() {
+            const fileInput = document.getElementById('newProdFile');
+            const file = fileInput.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        // Resize image to save storage space
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const maxWidth = 300;
+                        const scale = maxWidth / img.width;
+                        canvas.width = maxWidth;
+                        canvas.height = img.height * scale;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        const resizedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                        document.getElementById('imgPreview').src = resizedDataUrl;
+                        document.getElementById('imgPreviewContainer').style.display = 'block';
+                        currentImagePreview = resizedDataUrl;
+                        
+                        // Clear URL input to avoid confusion
+                        document.getElementById('newProdImgUrl').value = '';
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('newProdName').value;
+            const price = parseFloat(document.getElementById('newProdPrice').value);
+            const desc = document.getElementById('newProdDesc').value;
+            
+            // Determine which image source to use
+            const urlInput = document.getElementById('newProdImgUrl').value;
+            
+            // Priority: URL input > Uploaded File (stored in currentImagePreview) > Default
+            let finalImage = currentImagePreview;
+            if(urlInput.trim() !== "") {
+                finalImage = urlInput;
+            }
+
+            products.push({ id: Date.now(), name, price, desc, image: finalImage });
+            localStorage.setItem('products', JSON.stringify(products));
+            showToast('Product Added', 'success');
+            
+            // Reset Form
+            e.target.reset();
+            document.getElementById('imgPreviewContainer').style.display = 'none';
+            currentImagePreview = 'https://via.placeholder.com/300x200?text=No+Image';
+            
+            loadAdminProducts();
+        }
+
+        function deleteProduct(id) {
+            if(!confirm('Delete this product?')) return;
+            products = products.filter(p => p.id !== id);
+            localStorage.setItem('products', JSON.stringify(products));
+            loadAdminProducts();
+        }
+
+        function loadAdminOrders() {
+            renderAdminOrders(orders);
+        }
+
+        function renderAdminOrders(data) {
+            const list = document.getElementById('adminOrderList');
+            list.innerHTML = `<table class="orders-table">
+                <thead><tr><th>ID</th><th>User</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                    ${data.map(o => `
+                        <tr>
+                            <td>${o.id}</td>
+                            <td>${o.userName}</td>
+                            <td>$${o.total.toFixed(2)}</td>
+                            <td>${o.status}</td>
+                            <td><button class="btn btn-outline" style="padding:5px;" onclick="editOrderStatus('${o.id}')">Update</button></td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>`;
+        }
+        
+        function filterAdminOrders() {
+            const term = document.getElementById('orderSearch').value.toLowerCase();
+            const filtered = orders.filter(o => o.id.toLowerCase().includes(term) || o.userName.toLowerCase().includes(term));
+            renderAdminOrders(filtered);
+        }
+
+        function editOrderStatus(id) {
+            const order = orders.find(o => o.id === id);
+            showModal(`
+                <h3>Update Order ${id}</h3>
+                <p>Current Status: ${order.status}</p>
+                <div style="margin:20px 0;">
+                    <select id="newStatus" style="width:100%; padding:10px;">
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Shipped">Shipped</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <button class="btn btn-accent" onclick="saveOrderStatus('${id}')">Save Status</button>
+            `);
+        }
+
+        function saveOrderStatus(id) {
+            const newStatus = document.getElementById('newStatus').value;
+            const idx = orders.findIndex(o => o.id === id);
+            if(idx !== -1) {
+                orders[idx].status = newStatus;
+                localStorage.setItem('orders', JSON.stringify(orders));
+                showToast('Status Updated', 'success');
+                closeModal();
+                loadAdminOrders();
+            }
+        }
+    </script>
+</body>
+</html>
